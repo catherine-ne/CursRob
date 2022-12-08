@@ -1,0 +1,48 @@
+<div id="header-container">
+  <%= render 'application/form' %>
+</div>
+<div id="body-container" class="col" style="width: 100vw; justify-content: center;">
+  <% if @calculation_result.present? -%>
+    <div class="row">
+      <canvas id="distribution-histogram-chart"></canvas>
+    </div>
+    <div class="row">
+      <table class="table" id="expected-generation-result">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th scope="col">Method</th>
+            <th scope="col">Mean</th>
+            <th scope="col">Variance</th>
+            <th scope="col">Deviation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Analytic</th>
+            <td id="analytic-mean-value"></td>
+            <td id="analytic-variance-value"></td>
+            <td id="analytic-deviation-value"></td>
+          </tr>
+          <tr>
+            <th scope="row">Neumann</th>
+            <td id="neumann-mean-value"></td>
+            <td id="neumann-variance-value"></td>
+            <td id="neumann-deviation-value"></td>
+          </tr>
+          <tr>
+            <th scope="row">Metropolis</th>
+            <td id="metropolis-mean-value"></td>
+            <td id="metropolis-variance-value"></td>
+            <td id="metropolis-deviation-value"></td>
+          </tr>
+          <tr>
+            <th scope="row">Piecewise Approximation</th>
+            <td id="piecewise-mean-value"></td>
+            <td id="piecewise-variance-value"></td>
+            <td id="piecewise-deviation-value"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

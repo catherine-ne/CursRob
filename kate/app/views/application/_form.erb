@@ -1,0 +1,105 @@
+<div class="p-2">
+  <form>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">N = </span>
+      </div>
+      <input
+        type="number"
+        min="1"
+        class="form-control"
+        name="sample-size"
+        id="sample-size-distribution-input"
+        placeholder="Enter generation count value"
+        oninvalid="validate(this, 1)"
+        oninput="this.setCustomValidity('')"
+        required
+      >
+    </div>
+
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">X ≤ </span>
+      </div>
+      <input
+        type="number"
+        min="0.01"
+        class="form-control"
+        name="right-boundary"
+        step="0.01"
+        id="right-boundary-distribution-input"
+        placeholder="Enter right boundary of calculation"
+        oninvalid="validate(this, 0.01)"
+        oninput="this.setCustomValidity('')"
+        required
+      >
+    </div>
+
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">α = </span>
+      </div>
+      <input
+        type="number"
+        min="0.01"
+        class="form-control"
+        name="alpha"
+        id="alpha-distribution-input"
+        placeholder="Enter the alpha value"
+        step="0.01"
+        oninvalid="validate(this, 0.01)"
+        oninput="this.setCustomValidity('')"
+        required
+      >
+    </div>
+
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">β = </span>
+      </div>
+      <input
+        type="number"
+        min="0.01"
+        class="form-control"
+        name="beta"
+        id="beta-distribution-input"
+        placeholder="Enter the beta value"
+        step="0.01"
+        oninvalid="Number(this.value) < 0
+          ? this.setCustomValidity('Beta value should be greater than Zero')
+          : this.setCustomValidity('Beta value is required field')"
+        oninput="this.setCustomValidity('')"
+        required
+      >
+    </div>
+    <div class="d-flex justify-content-end">
+      <div class="d-flex align-items-center" style="gap: 16px;">
+        <button type="submit" class="btn btn-primary">Calculate</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+    function validate(input, minExpectedValue) {
+        if (Number(input.value) < minExpectedValue) {
+            input.setCustomValidity(`Generation count should be greater than ${minExpectedValue}`);
+        }
+    }
+
+    function fillForm() {
+        const params = (new URL(document.location)).searchParams;
+
+        const sampleSize = params.get("sample-size");
+        const rightBoundary = params.get("right-boundary");
+        const alpha = params.get("alpha");
+        const beta = params.get("beta");
+
+        document.getElementById('sample-size-distribution-input').value = sampleSize ? Number(sampleSize) : 100000;
+        document.getElementById('right-boundary-distribution-input').value = rightBoundary ? Number(rightBoundary) : 3;
+        document.getElementById('alpha-distribution-input').value = alpha ? Number(alpha) : 0.25;
+        document.getElementById('beta-distribution-input').value = beta ? Number(beta) : 0;
+    }
+
+    fillForm();
+</script>
